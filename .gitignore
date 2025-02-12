@@ -1,0 +1,38 @@
+# Игнорировать файлы, созданные Xcode
+.DS_Store
+*.swp
+*.xcuserstate
+*.xcworkspace
+*.xcodeproj
+xcuserdata/
+DerivedData/
+
+# Игнорировать скомпилированные бинарники и временные файлы
+.build/
+*.o
+*.out
+*.a
+*.dylib
+*.framework
+
+# Игнорировать файлы, созданные Swift Package Manager
+.swiftpm/
+Packages/
+.resolved
+
+# Игнорировать пользовательские настройки
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# Игнорировать логи и кэши
+logs/
+*.log
+*.cache
+
+# Игнорировать системные файлы
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
