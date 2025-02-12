@@ -3,7 +3,6 @@
 *.swp
 *.xcuserstate
 *.xcworkspace
-*.xcodeproj
 xcuserdata/
 DerivedData/
 
