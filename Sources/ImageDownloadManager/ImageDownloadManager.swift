@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 
 /// Protocol defining the image download management functionality.
-protocol ImageDownloadManagerInterface {
+public protocol ImageDownloadManagerInterface {
     /// Downloads an image from the specified URL.
     /// - Parameters:
     ///   - url: The URL to download the image from.
@@ -49,7 +49,7 @@ public final class ImageDownloadManager: NSObject, URLSessionDownloadDelegate, I
     }()
 
     /// Singleton instance for shared use of `ImageDownloadManager`.
-    static var shared: ImageDownloadManagerInterface = ImageDownloadManager()
+    public static var shared: ImageDownloadManagerInterface = ImageDownloadManager()
 
     /// Private initializer to enforce singleton usage.
     private override init() { }
@@ -60,7 +60,7 @@ public final class ImageDownloadManager: NSObject, URLSessionDownloadDelegate, I
     ///   - progressHandler: A closure called with download progress updates (optional).
     /// - Returns: The downloaded image as a `UIImage`.
     /// - Throws: An error if the download fails.
-    func downloadImage(from url: URL, progressHandler: ((Double) -> Void)? = nil) async throws -> UIImage {
+    public func downloadImage(from url: URL, progressHandler: ((Double) -> Void)? = nil) async throws -> UIImage {
         Log.info("Starting download for URL: \(url.absoluteString)")
 
         // Check in data cache first
@@ -111,7 +111,7 @@ public final class ImageDownloadManager: NSObject, URLSessionDownloadDelegate, I
 
     /// Cancels the download task for the given URL if it exists.
     /// - Parameter url: The URL whose download task should be canceled.
-    func cancelDownload(for url: URL) {
+    public func cancelDownload(for url: URL) {
         Task {
             await taskManager.getTask(for: url)?.cancel()
             Log.info("Download canceled for URL: \(url)")
@@ -123,7 +123,7 @@ public final class ImageDownloadManager: NSObject, URLSessionDownloadDelegate, I
     /// If resume data is available, the download continues from where it left off.
     /// Otherwise, a new download is started.
     /// - Parameter url: The URL of the image to resume downloading.
-    func resumeDownload(for url: URL) {
+    public func resumeDownload(for url: URL) {
         Task {
             if let resumeData = await taskManager.getResumeData(for: url) {
                 Log.info("Resuming download for URL: \(url.absoluteString)")
@@ -149,7 +149,7 @@ public final class ImageDownloadManager: NSObject, URLSessionDownloadDelegate, I
     /// If the download task is found, it is canceled with resume data.
     /// The resume data is then stored for future use.
     /// - Parameter url: The URL of the image download to pause.
-    func pauseDownload(for url: URL) {
+    public func pauseDownload(for url: URL) {
         Task {
             guard let task = await taskManager.getTask(for: url),
                   let downloadingInfo = await taskManager.getDownloadingInfo(for: url) else {
